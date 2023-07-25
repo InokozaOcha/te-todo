@@ -7,15 +7,16 @@ import { useSignOut } from "../hooks/useSignOut";
 const Header = () => {
   const user = useUser().user;
   const signOut = useSignOut().signOut;
+
   return (
     <AppBar>
       <Container className="my-header">
         {user.name ? <div></div> : <></>}
         <Box className=" my-header-contents my-header-username">
           {user.name ? (
-            <Typography className="  ">ようこそ！{user.name}さん</Typography>
+            <Typography>ようこそ！{user.name}さん</Typography>
           ) : (
-            <Typography className="  ">ようこそ！</Typography>
+            <Typography>ようこそ！</Typography>
           )}
         </Box>
         <Box className="my-header-contents my-header-signout">

@@ -1,66 +1,8 @@
-import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
+import { useRecoilState } from "recoil";
 import { todoListState } from "../states/todoListState";
-import { serchedTodoListState } from "../states/serchedTodoListState";
 
 export const useTodoSerch = () => {
-  const todoListOrigin = useRecoilValue(todoListState);
   const [todoList, setTodoList] = useRecoilState(todoListState);
-
-  const todolistValueCopy = () => {
-    setTodoList(todoListOrigin);
-    return todoList;
-  };
-
-  const serchedTodo = (serchWord: string) => {
-    if (serchWord !== "") {
-      const filteredList = todoList
-        .map((todo) => {
-          console.log(todo.title);
-          if (todo.title.indexOf(serchWord) > -1) {
-            console.log(todo);
-            return todo;
-          } else {
-            const todoCopy = Object.assign({}, todo);
-            todoCopy.style = "vanished-todo";
-            return todoCopy;
-            return {
-              id: todo.id,
-              title: todo.title,
-              memo: todo.memo,
-              date: todo.date,
-              state: todo.state,
-              style: "vanished-todo",
-            };
-            // return todo;
-          }
-        })
-        .flatMap((e) => e ?? []);
-
-      setTodoList(filteredList);
-      console.log(filteredList);
-      return;
-    } else {
-      const filteredList = todoList
-        .map((todo) => {
-          return {
-            id: todo.id,
-            title: todo.title,
-            memo: todo.memo,
-            date: todo.date,
-            state: todo.state,
-            style: "",
-          };
-          // return todo;
-        })
-        .flatMap((e) => e ?? []);
-
-      setTodoList(filteredList);
-      console.log(filteredList);
-
-      return;
-    }
-    return;
-  };
 
   const selectTodo = (
     want: boolean,
@@ -172,8 +114,6 @@ export const useTodoSerch = () => {
     serchWord: string,
     selectState: [boolean, boolean, boolean, boolean]
   ) => {
-    console.log("かんすうないです");
-    console.log(selectState);
     const filteredList = todoList
       .map((todo) => {
         const combineTitleMemo = todo.title + todo.memo;
@@ -211,5 +151,5 @@ export const useTodoSerch = () => {
 
     setTodoList(filteredList);
   };
-  return { serchTodo, serchedTodo, todolistValueCopy, selectTodo };
+  return { serchTodo, selectTodo };
 };

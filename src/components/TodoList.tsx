@@ -5,12 +5,10 @@ import { Card, Container, Typography } from "@mui/material";
 import Modal from "react-modal";
 import TodoInputBox from "./TodoInputBox";
 import { Todo } from "../types/Todo";
-import { useTodoSerch } from "../hooks/useTodoSerch";
 
 const TodoList = () => {
   const todolist = useTodoList().todoListValue;
-  //const todolist = useTodoSerch().todolistValueCopy();
-  //const serchedTodo = useTodoSerch().serchedTodo;
+
   const deleteTodo = useTodoDelete().deleteTodo;
   const [openModal, setOpenModal] = useState(false);
   const [todoObject, setTodoObject] = useState<Todo>({
@@ -43,10 +41,22 @@ const TodoList = () => {
                 setOpenModal(true);
               }}
             >
-              <div className="todo-date">{todo.date}</div>
+              <div className="card-top">
+                <div className="todo-date">{todo.date}</div>
+
+                <div
+                  className="card-top-div"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    deleteTodo(todo.id);
+                  }}
+                >
+                  X
+                </div>
+              </div>
+
               <Typography>{todo.title}</Typography>
               <Typography>{todo.memo}</Typography>
-              <div onClick={() => deleteTodo(todo.id)}>x</div>
             </div>
           </Card>
         ))}

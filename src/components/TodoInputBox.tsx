@@ -1,26 +1,13 @@
-import React from "react";
-import { useForm, SubmitHandler } from "react-hook-form";
-import {
-  Stack,
-  TextField,
-  Button,
-  Input,
-  Grid,
-  ButtonGroup,
-  Typography,
-  Icon,
-  Container,
-  Box,
-} from "@mui/material";
+import { useForm } from "react-hook-form";
+import { TextField, Button, ButtonGroup, Typography, Box } from "@mui/material";
 import "../App.css";
 import { useState, Dispatch, SetStateAction } from "react";
-import firebase from "firebase/compat/app";
 import { TodoRegister } from "../types/TodoRegister";
 import { useTodoAdd } from "../hooks/useTodoAdd";
 import { Todo } from "../types/Todo";
-import {} from "@mui/icons-material";
 import DeleteOutlineOutlinedIcon from "@mui/icons-material/DeleteOutlineOutlined";
 import { useTodoDelete } from "../hooks/useTodoDelete";
+import { useTodoInputBox } from "../hooks/useTodoInputBox";
 
 const TodoInputBox = ({
   openTodoInputBoxButton,
@@ -33,60 +20,42 @@ const TodoInputBox = ({
   postTodoObject: Todo;
   postInputMode: String;
 }) => {
-  const {
-    register,
-    formState: { errors },
-    handleSubmit,
-  } = useForm<TodoRegister>();
+  //ここから記述
+  //useInputで使うために受け取ったものを全部渡す
+  const useInput = useTodoInputBox({
+    openTodoInputBoxButton,
+    setOpenTodoInputBoxButton,
+    postTodoObject,
+    postInputMode,
+  });
 
-  const makeDateToday = postTodoObject.date;
-  const nowDate = makeDateToday.toISOString().split("T")[0];
-  const nowTime = makeDateToday.toLocaleTimeString();
-  const nowTimeArry = nowTime.split(":");
-  const nowTimehhmm = `${("00" + nowTimeArry[0]).slice(-2)}:${(
-    "00" + nowTimeArry[1]
-  ).slice(-2)}`;
-  console.log(nowTime);
+  const register = useInput.register;
+  const handleSubmit = useInput.handleSubmit;
 
-  const addTodo = useTodoAdd();
+  const date = useInput.date;
+  const setDate = useInput.setDate;
+  const time = useInput.time;
+  const setTime = useInput.setTime;
 
-  const [date, setDate] = useState(nowDate);
-  const [time, setTime] = useState(nowTimehhmm);
-  const onSubmit = (data: TodoRegister) => {
-    console.log("kkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk");
-    console.log(postInputMode);
+  const onSubmit = useInput.onSubmit;
 
-    const newData: TodoRegister = {
-      id: todoId,
-      title: data.title,
-      memo: data.memo,
-      date: data.date,
-      time: data.time,
-      state: todoState,
-    };
-
-    addTodo.addTodo(newData, postInputMode);
-  };
-
-  const selectidButtonStyle = (state: string, thisButtonState: string) => {
-    if (state == thisButtonState) {
-      return "contained";
-    } else {
-      return "outlined";
-    }
-  };
-
-  const [todoState, setTodoState] = useState("ready");
-  const [todoTitle, setTodoTitle] = useState(postTodoObject.title);
-  const [todoMemo, setTodoMemo] = useState(postTodoObject.memo);
-  const todoId = postTodoObject.id;
+  const selectidButtonStyle = useInput.selectidButtonStyle;
 
   const inputMode = postInputMode;
   const deleteTodo = useTodoDelete().deleteTodo;
 
+  const todoState = useInput.todoState;
+  const setTodoState = useInput.setTodoState;
+
+  const todoTitle = useInput.todoTitle;
+  const setTodoTitle = useInput.setTodoTitle;
+
+  const todoMemo = useInput.todoMemo;
+  const setTodoMemo = useInput.setTodoMemo;
+
   return (
     <>
-      {inputMode == "Add" ? (
+      {inputMode === "Add" ? (
         <Typography>{`新規作成`}</Typography>
       ) : (
         <Box className="separate">
@@ -111,6 +80,7 @@ const TodoInputBox = ({
           setTodoTitle(e.target.value);
         }}
       />
+
       <TextField
         value={todoMemo}
         className="inputBox my-inputbox"
@@ -127,9 +97,7 @@ const TodoInputBox = ({
         value={date}
         {...register("date")}
         onChange={(e) => {
-          console.log(e.target.value);
           setDate(e.target.value);
-          // DateToTimeStampChanger(date, time);
         }}
         className="inputBox my-inputbox"
         type="date"
@@ -189,8 +157,8 @@ const TodoInputBox = ({
           Done
         </Button>
       </ButtonGroup>
-
-      {inputMode == "Add" ? (
+      {}
+      {inputMode === "Add" ? (
         <Button
           variant="contained"
           color="primary"

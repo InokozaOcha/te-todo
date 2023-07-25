@@ -41,17 +41,9 @@ const TodoInputBoxOpenButton = () => {
         </Button>
         <Modal
           isOpen={openTodoInputBoxButton}
-          // style={customStyles}
           onRequestClose={() => setOpenTodoInputBoxButton(false)}
         >
           <div className="rootDiv">
-            {/* <Grid
-              alignItems="center"
-              container
-              justifyContent="center"
-              direction="column"
-            > */}
-            {/* </div> <Grid xs={12}> */}
             <TodoInputBox
               openTodoInputBoxButton={openTodoInputBoxButton}
               setOpenTodoInputBoxButton={setOpenTodoInputBoxButton}
@@ -60,17 +52,11 @@ const TodoInputBoxOpenButton = () => {
                 title: "",
                 memo: "",
                 date: new Date(),
-                state: "Ready",
+                state: "ready",
                 style: "",
               }}
               postInputMode={"Add"}
             />
-            {/* </Grid>
-              <Grid xs={3}></Grid> */}
-
-            {/* <Grid xs={120}> */}
-            {/* </Grid> */}
-            {/* </Grid> */}
           </div>
         </Modal>
       </Container>

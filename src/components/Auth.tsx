@@ -3,21 +3,15 @@ import { auth, provider, storage } from "../firebase";
 import { useRecoilState } from "recoil";
 import { userState } from "../states/userState";
 import { Box, Button, Container, Grid, Typography } from "@mui/material";
+import { useUser } from "../hooks/useUser";
+import { useAuth } from "../hooks/useAuth";
 
 const Auth = () => {
-  const [user, setUser] = useRecoilState(userState);
-  const signInGoogle = async () => {
-    console.log("ositade!!!!!!!!!");
-    console.log(auth.currentUser?.uid);
-    await auth.signInWithPopup(provider).catch((err) => alert(err.message));
-    console.log("Authご");
-    setUser({
-      uid: auth.currentUser?.uid,
-      name: auth.currentUser?.displayName,
-      photoUrl: auth.currentUser?.uid,
-    });
-    console.log(auth.currentUser?.uid);
-  };
+  const userState = useUser();
+  const setUser = userState.setUser;
+  const user = userState.user;
+
+  const signInGoogle = useAuth().signInGoogle;
 
   return (
     <Container>

@@ -18,13 +18,14 @@ export const useSignInCheck = () => {
       if (authUser) {
         //console.log("ログインしてます");
         //ログインしてたときの処理
+
         setUser({
           uid: auth.currentUser?.uid,
           name: auth.currentUser?.displayName,
           photoUrl: auth.currentUser?.uid,
         });
 
-        fetchTodoList();
+        fetchTodoList(auth.currentUser?.uid as string);
       } else {
         //console.log("ログインしてません");
         //ログインしてなかった時の処理

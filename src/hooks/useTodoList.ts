@@ -1,10 +1,12 @@
 import { useRecoilValue, useSetRecoilState } from "recoil";
 import { todoListState } from "../states/todoListState";
 import { db } from "../firebase";
+import { useUser } from "./useUser";
 
 export const useTodoList = () => {
   const todoListValue = useRecoilValue(todoListState);
   const setTodoList = useSetRecoilState(todoListState);
+  const user = useUser().user;
 
   const dateFormatter = (dateString: string) => {
     const dateArry1 = dateString.split(" ");
@@ -40,26 +42,30 @@ export const useTodoList = () => {
     return;
   };
 
-  const fetchTodoList = async () => {
+  const fetchTodoList = async (uid: string) => {
     db.collection("posts")
+      //.where("uid", "==", user.uid)
       .orderBy("date", "desc")
       .onSnapshot((data) => {
-        const todoList = data.docs.map((todo) => {
-          console.log(todo.data());
-          return {
-            id: todo.id,
-            title: todo.data().title as string,
-            memo: todo.data().memo as string,
-            date: dateFormatter(
-              todo
-                .data({ serverTimestamps: "estimate" })
-                .date?.toDate()
-                .toLocaleString()
-            ),
-            state: todo.data().state as string,
-            style: "",
-          };
-        });
+        const todoList = data.docs
+          .map((todo) => {
+            if (uid === todo.data().uid) {
+              return {
+                id: todo.id,
+                title: todo.data().title as string,
+                memo: todo.data().memo as string,
+                date: dateFormatter(
+                  todo
+                    .data({ serverTimestamps: "estimate" })
+                    .date?.toDate()
+                    .toLocaleString()
+                ),
+                state: todo.data().state as string,
+                style: "",
+              };
+            }
+          })
+          .flatMap((e) => e ?? []);
 
         setTodoList(todoList);
       });

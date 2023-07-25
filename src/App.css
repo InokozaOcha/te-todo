@@ -266,3 +266,12 @@ height: 80%;
 
   
 }
+
+.card-top {
+  display: flex;
+  justify-content: space-between;
+}
+
+.card-top-div {
+  margin: 10px;
+}

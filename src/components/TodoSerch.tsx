@@ -1,7 +1,6 @@
 import { TextField, Button, ButtonGroup } from "@mui/material";
-import React, { useState } from "react";
+import { useState } from "react";
 import { useTodoSerch } from "../hooks/useTodoSerch";
-import { set } from "react-hook-form";
 
 const TodoSerch = () => {
   const [serchWord, setSerchWord] = useState("");
@@ -25,36 +24,24 @@ const TodoSerch = () => {
         className="inputBox my-inputbox serch-box"
         value={serchWord}
         onChange={(e) => {
-          console.log(serchWord);
           setSerchWord(e.target.value);
           serchTodo(e.target.value, selectState);
-          //  serchTodo(e.target.value);
         }}
       />
       <ButtonGroup
         className="my-button-group"
-        // color="secondary"
-        //value = {todoState}
         aria-label="outlined secondary button group"
-        //
       >
         <Button
           variant={selectState[0] ? "contained" : "outlined"}
           className="stateButton"
           onClick={() => {
-            console.log(selectState);
             selectTodo(serchWord, [
               !selectState[0],
               selectState[1],
               selectState[2],
               selectState[3],
             ]);
-            // selectTodo(
-            //   !selectState[0],
-            //   selectState[1],
-            //   selectState[2],
-            //   selectState[3]
-            // );
           }}
         >
           Want
@@ -83,12 +70,6 @@ const TodoSerch = () => {
               !selectState[2],
               selectState[3],
             ]);
-            // selectTodo(
-            //   selectState[0],
-            //   selectState[1],
-            //   !selectState[2],
-            //   selectState[3]
-            // );
           }}
         >
           Doing
