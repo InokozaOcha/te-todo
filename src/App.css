@@ -1,5 +1,6 @@
 .App {
   text-align: center;
+
 }
 
 .App-logo {
@@ -35,4 +36,233 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+.inputBox {
+  /* min-width: 300px; */
+  width: 100%;
+}
+
+.rootDiv {
+  /* min-width: 300; */
+  width: 100%;
+}
+
+
+
+.rootDiv {
+  height: 98%;
+
+}
+
+.inputContainer {
+  display: grid;
+  gap: 10px;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-template-rows: 1fr auto 1fr 1fr 1fr;
+
+}
+
+.inputItem {
+  background: #ddd;
+  padding: 10px;
+  border-radius: 8px;
+  border: 3px solid #ccc;
+  
+}
+
+.longItem {
+  grid-column: 1/5;
+}
+
+.midItemR {
+  grid-column: 3/5;
+}
+
+
+.midItemM {
+  grid-column: 2/4;
+}
+
+.midItemL {
+  grid-column: 1/3;
+}
+
+.MuiGrid-root {
+  height: 91%;
+} 
+
+.myButton {
+  margin:  0 auto;
+}
+
+
+
+.buttonAlign{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+.stateButton{
+  width: 25%;
+}
+
+.myContainer {
+  display: grid;
+  place-content: center;
+  place-items: center;
+  min-height: 100vh
+}
+
+#signin-button {
+  margin : 16px !important; 
+}
+
+.top-margin {
+  height: 100px;
+}
+
+.my-header {
+  display: flex !important;
+  justify-content: space-between;
+  height: 80px;
+  display: table !important;
+
+}
+
+.my-header-contents {
+  display: table-cell !important;
+  vertical-align: middle !important;
+  height: 80px !important;
+}
+
+.my-header-username {
+  text-align: left;
+}
+
+.my-header-signout{
+  text-align: right;
+  margin-left: 30px;
+}
+
+.my-add-button{
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  text-align: right;
+  margin-bottom: 20px;
+  right: 0px;
+}
+
+.my-circle-button{
+	width: 80px;
+	height: 80px;
+	border-radius: 50% !important;
+  font-size: xx-large !important;
+}
+
+
+
+.my-card-container {
+  display: flex !important;
+  flex-direction: row !important;
+  flex-wrap: wrap !important;
+  
+  justify-content: center;
+}
+
+.my-card {
+  text-align: center;
+  margin: 20px;
+  width: 300px;
+}
+
+.todo-date {
+  text-align: left;
+  margin: 10px;
+}
+
+.ReactModal__Content{
+  margin-top: 60px;
+}
+
+.my-inputbox{
+  margin-top: 10px !important;
+}
+
+
+.my-button-register {
+  margin-top: 10px !important;
+  height: 80px;
+  width: 100%;
+}
+
+.my-button-close {
+  margin-top: 20px !important;
+  height: 50px;
+  width: 30%;    
+  display: block !important;
+  margin-left: auto !important;
+  margin-bottom: 20px !important;
+}
+
+.my-inputbox-bottom {
+  height: 30px;
+}
+
+.ReactModal__Content--after-open{
+height: 80%;
+}
+
+.css-iajp3t-MuiButtonGroup-root {
+  width: 100%;
+  display: block !important;
+  margin-left: auto !important;
+  margin-top: 20px;
+}
+
+.MuiButtonGroup-grouped {
+  width: 25%;
+}
+
+.want {
+  background-color: rgb(255, 243, 243) !important;
+}
+
+.ready {
+  background-color: rgb(255, 255, 243)!important;
+}
+
+.doing {
+  background-color: rgb(232, 255, 235)!important;
+}
+.done {
+  background-color: rgb(230, 249, 255)!important;
+}
+
+
+
+
+
+.separate {
+  display: flex;
+  justify-content: space-between;
+}
+
+.serch-box {
+  /* margin-left: 20% !important;
+  margin-right: 20% !important; */
+  max-width: 986px;
+}
+
+.vanished-todo {
+  display: none;
+}
+
+.my-button-group {
+ margin: auto;
+  margin-top: 20px;
+  max-width: 986px;
+
+  
 }

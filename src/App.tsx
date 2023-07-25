@@ -1,26 +1,14 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useEffect } from "react";
+import "./App.css";
+import Top from "./components/Top";
+import Auth from "./components/Auth";
+import { useSignInCheck } from "./hooks/useSignInCheck";
+import { AppBar } from "@mui/material";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+const App: React.FC = () => {
+  const signInCheck = useSignInCheck();
+  return <div className="App">{signInCheck.user.uid ? <Top /> : <Auth />}</div>;
+  //return <div>hoge</div>;
+};
 
 export default App;
